@@ -10,9 +10,9 @@ export interface IAppState {
 @Component({
   selector: 'app-add-todo',
   template: `
-    <md-input>
-      <input #taskName md-input placeholder="What needs to be done?">
-    </md-input>
+    <md-input-container>
+      <input #taskName mdInput placeholder="What needs to be done?">
+    </md-input-container>
     <button (click)="createTask(taskName.value)" md-button>Add todo!</button>
   `,
   styles: [`

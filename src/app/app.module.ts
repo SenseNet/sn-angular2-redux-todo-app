@@ -24,7 +24,7 @@ import { listByFilter } from './reducers/filtering';
 interface IAppState { };
 SetSiteUrl('https://demo06.demo.sensenet.com');
 
-const collection = Reducers.collection;
+const collection = Reducers['collection'];
 const myReducer = combineReducers({
   collection,
   listByFilter

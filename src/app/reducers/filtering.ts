@@ -65,12 +65,12 @@ export const listByFilter = combineReducers({
 });
 
 export const getVisibleTodos = (state, filter) => {
-  const ids = Reducers.getIds(state.listByFilter[filter]);
-  return ids.map(Id => Reducers.getContent(state.collection.byId, Id));
+  const ids = Reducers['getIds'](state.listByFilter[filter]);
+  return ids.map(Id => Reducers['getContent'](state.collection.byId, Id));
 };
 
 export const getIsFetching = (state, filter) =>
-  Reducers.getFetching(state.listByFilter[filter]);
+  Reducers['getFetching'](state.listByFilter[filter]);
 
 export const getErrorMessage = (state, filter) =>
-  Reducers.getError(state.listByFilter[filter]);
+  Reducers['getError'](state.listByFilter[filter]);
