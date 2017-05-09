@@ -1,0 +1,6 @@
+{
+    "/odata.svc": {
+        "target": "http://localhost:64196",
+        "secure": false
+    }
+}
