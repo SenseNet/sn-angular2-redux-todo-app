@@ -6,7 +6,7 @@ import { MaterialModule } from '@angular/material';
 import 'hammerjs';
 
 import 'rxjs';
-import { NgReduxModule, NgRedux } from 'ng2-redux';
+import { NgReduxModule, NgRedux } from '@angular-redux/store';
 
 import { SnTodoListComponent } from './app.component';
 import { AddTodoComponent } from './add-todo/add-todo.component';
@@ -18,11 +18,13 @@ import { FiltermenuComponent } from './filtermenu/filtermenu.component';
 import { combineReducers } from 'redux';
 import { Store, Reducers } from 'sn-redux';
 import { Observable } from 'rxjs/Observable';
-import { Collection, ODataApi, SetSiteUrl } from 'sn-client-js';
+import { Collection, ODataApi } from 'sn-client-js';
 import { listByFilter } from './reducers/filtering';
 
 interface IAppState { };
-SetSiteUrl('https://demo06.demo.sensenet.com');
+
+// ToDo
+// SetSiteUrl('https://demo06.demo.sensenet.com');
 
 const collection = Reducers['collection'];
 const myReducer = combineReducers({

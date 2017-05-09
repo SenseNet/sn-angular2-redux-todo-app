@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Inject, Input, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { getVisibleTodos } from '../reducers/filtering';
-import { NgRedux, select } from 'ng2-redux';
+import { NgRedux, select } from '@angular-redux/store';
 import { ODataApi } from 'sn-client-js';
 import { Actions } from 'sn-redux';
 
@@ -12,7 +12,7 @@ export interface IAppState {
   selector: 'app-todolist',
   template: `
     <ul>
-    <app-todo 
+    <app-todo
       *ngFor="let todo of todos$ | async"
       [todo]="todo">
     </app-todo>
@@ -28,7 +28,7 @@ export interface IAppState {
   `],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TodolistComponent implements OnInit {
+export class TodolistComponent implements OnInit, OnChanges {
   filter = 'All';
   todos = [];
   todos$: Observable<any>;
@@ -63,16 +63,16 @@ export class TodolistComponent implements OnInit {
     });
     switch (this.filter) {
       case 'All':
-        optionObj['filter'] = `isOf('Task')`;
+        optionObj.filter = `isOf('Task')`;
         break;
       case 'Active':
-        optionObj['filter'] = `isOf('Task') and Status eq %27Active%27`;
+        optionObj.filter = `isOf('Task') and Status eq %27Active%27`;
         break;
       case 'Completed':
-        optionObj['filter'] = `isOf('Task') and Status eq %27Completed%27`;
+        optionObj.filter = `isOf('Task') and Status eq %27Completed%27`;
         break;
       default:
-        optionObj['filter'] = `isOf('Task')`;
+        optionObj.filter = `isOf('Task')`;
         break;
     }
     return optionObj;

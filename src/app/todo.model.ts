@@ -4,7 +4,7 @@ export class Todo {
     public Id: number;
     public Path: string;
 
-    constructor(DisplayName: string, status, Id: number, Path: string){
+    constructor(DisplayName: string, status, Id: number, Path: string) {
         this.DisplayName = DisplayName;
         this.status = status[0] === 'active' ? true : false;
         this.Id = Id;
