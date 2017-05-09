@@ -18,13 +18,10 @@ import { FiltermenuComponent } from './filtermenu/filtermenu.component';
 import { combineReducers } from 'redux';
 import { Store, Reducers } from 'sn-redux';
 import { Observable } from 'rxjs/Observable';
-import { Collection, ODataApi } from 'sn-client-js';
+import { Collection, ODataApi, Repository } from 'sn-client-js';
 import { listByFilter } from './reducers/filtering';
 
 interface IAppState { };
-
-// ToDo
-// SetSiteUrl('https://demo06.demo.sensenet.com');
 
 const collection = Reducers['collection'];
 const myReducer = combineReducers({
@@ -32,7 +29,16 @@ const myReducer = combineReducers({
   listByFilter
 });
 
-const store = Store.configureStore(myReducer, null, null, { });
+const repository = new Repository.SnRepository({
+  // You can set your site URL here, if it's different from the host that will serve this ToDo application
+  // RepositoryUrl: 'https://demo06.demo.sensenet.com'
+});
+
+repository.httpProviderRef.SetGlobalHeader('X-Access-Data', null);
+
+
+
+const store = Store.configureStore(myReducer, null, null, { }, repository);
 
 @NgModule({
   declarations: [
