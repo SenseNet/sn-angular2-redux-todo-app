@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 
 import 'rxjs';
@@ -53,6 +54,7 @@ const store = Store.configureStore(myReducer, null, null, { }, repository);
     FormsModule,
     HttpModule,
     MaterialModule.forRoot(),
+    BrowserAnimationsModule,
     NgReduxModule
   ],
   exports: [
