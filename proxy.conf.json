@@ -1,6 +1,8 @@
 {
     "/odata.svc": {
-        "target": "http://localhost:64196",
-        "secure": false
+        "target": "http://sn-local/",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"        
     }
 }
