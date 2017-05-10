@@ -30,8 +30,8 @@ export interface IAppState {
 })
 export class TodolistComponent implements OnInit, OnChanges {
   filter = 'All';
-  todos = [];
-  todos$: Observable<any>;
+  todos: ContentTypes.Task[] = [];
+  todos$: Observable<ContentTypes.Task[]>;
   @Input() state: IAppState;
   @Input() path: string;
   constructor(private ngRedux: NgRedux<IAppState>) {
@@ -54,7 +54,7 @@ export class TodolistComponent implements OnInit, OnChanges {
       this.filter = filter;
       this.state = this.ngRedux.getState();
       let optionObj = this.getOptionObject(this.filter);
-      this.ngRedux.dispatch(Actions.RequestContent(this.path, optionObj));
+      this.ngRedux.dispatch(Actions.RequestContent(this.path, optionObj, ContentTypes.Task));
     }
   }
   getOptionObject(filter) {
@@ -62,15 +62,13 @@ export class TodolistComponent implements OnInit, OnChanges {
       select: ['DisplayName', 'Status']
     });
     switch (this.filter) {
-      case 'All':
-        optionObj.filter = `isOf('Task')`;
-        break;
       case 'Active':
-        optionObj.filter = `isOf('Task') and Status eq %27Active%27`;
+        optionObj.filter = `isOf('Task') and Status eq 'Active'`;
         break;
       case 'Completed':
-        optionObj.filter = `isOf('Task') and Status eq %27Completed%27`;
+        optionObj.filter = `isOf('Task') and Status eq 'Completed'`;
         break;
+      case 'All':
       default:
         optionObj.filter = `isOf('Task')`;
         break;
