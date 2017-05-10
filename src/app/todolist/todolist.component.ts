@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, Input, ChangeDetectionStrategy, OnChanges } 
 import { Observable } from 'rxjs/Observable';
 import { getVisibleTodos } from '../reducers/filtering';
 import { NgRedux, select } from '@angular-redux/store';
-import { ODataApi } from 'sn-client-js';
+import { ODataApi, ContentTypes } from 'sn-client-js';
 import { Actions } from 'sn-redux';
 
 export interface IAppState {
@@ -44,7 +44,7 @@ export class TodolistComponent implements OnInit, OnChanges {
 
     let optionObj = this.getOptionObject(this.filter);
 
-    this.ngRedux.dispatch(Actions.RequestContent(this.path, optionObj));
+    this.ngRedux.dispatch(Actions.RequestContent(this.path, optionObj, ContentTypes.Task));
   }
   ngOnChanges() {
 

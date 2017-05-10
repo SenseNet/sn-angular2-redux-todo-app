@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
 import { Actions } from 'sn-redux';
-import { Todo } from '../todo.model';
+import { ContentTypes } from 'sn-client-js';
 
 export interface IAppState {
 };
@@ -24,7 +24,7 @@ export interface IAppState {
   `]
 })
 export class TodoComponent implements OnInit {
-  @Input() todo: Todo;
+  @Input() todo: ContentTypes.Task;
   @Output() update = new EventEmitter();
   checked = false;
   constructor(private ngRedux: NgRedux<IAppState>) {
@@ -32,7 +32,7 @@ export class TodoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.checked = (this.todo['Status'][0] === 'active') ? false : true;
+    this.checked = (this.todo.Status[0] === 'active') ? false : true;
   }
 
   deleteTask(id) {
