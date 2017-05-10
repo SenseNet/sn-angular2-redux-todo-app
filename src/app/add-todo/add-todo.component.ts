@@ -30,7 +30,6 @@ export class AddTodoComponent implements OnInit {
 
   createTask(title: string) {
     this.ngRedux.dispatch(Actions.CreateContent(this.path, ContentTypes.Task, {
-      Id: 123,
       Name: title,
       DueDate: null
     }));
