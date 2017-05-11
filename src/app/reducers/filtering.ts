@@ -74,3 +74,7 @@ export const getIsFetching = (state, filter) =>
 
 export const getErrorMessage = (state, filter) =>
   Reducers['getError'](state.listByFilter[filter]);
+
+export const getLoginState = (state) => {
+  Reducers['getAuthenticationStatus'](state)
+}

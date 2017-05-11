@@ -32,7 +32,7 @@ export class TodoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.checked = (this.todo.Status[0] === 'active') ? false : true;
+    this.checked = (this.todo.Status[0] === 'completed') ? true : false;
   }
 
   deleteTask(id) {

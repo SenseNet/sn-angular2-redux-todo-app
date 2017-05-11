@@ -14,6 +14,7 @@ import { AddTodoComponent } from './add-todo/add-todo.component';
 import { TodolistComponent } from './todolist/todolist.component';
 import { TodoComponent } from './todo/todo.component';
 
+import { LoginComponent, LoginDialogComponent } from './login/login.component';
 import { FiltermenuComponent } from './filtermenu/filtermenu.component';
 
 import { combineReducers } from 'redux';
@@ -35,10 +36,6 @@ const repository = new Repository.SnRepository({
   // RepositoryUrl: 'https://demo06.demo.sensenet.com'
 });
 
-repository.httpProviderRef.SetGlobalHeader('X-Access-Data', null);
-
-
-
 const store = Store.configureStore(myReducer, null, null, { }, repository);
 
 @NgModule({
@@ -47,7 +44,9 @@ const store = Store.configureStore(myReducer, null, null, { }, repository);
     AddTodoComponent,
     TodolistComponent,
     TodoComponent,
-    FiltermenuComponent
+    FiltermenuComponent,
+    LoginComponent,
+    LoginDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +61,11 @@ const store = Store.configureStore(myReducer, null, null, { }, repository);
     AddTodoComponent,
     TodolistComponent,
     TodoComponent,
-    FiltermenuComponent
+    FiltermenuComponent,
+    LoginComponent
+  ],
+  entryComponents: [
+    LoginDialogComponent
   ],
   providers: [NgReduxModule],
   bootstrap: [SnTodoListComponent]

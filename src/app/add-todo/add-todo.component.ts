@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { NgRedux } from '@angular-redux/store';
 import { Actions } from 'sn-redux';
 import { Content, ContentTypes } from 'sn-client-js';
+import { Enums } from 'sn-client-js';
 
 export interface IAppState {
 };
