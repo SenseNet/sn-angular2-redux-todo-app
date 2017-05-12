@@ -41,7 +41,9 @@ export class TodoComponent implements OnInit {
 
   changeCompletion(todoItem) {
     const status = (todoItem.Status[0] === 'active') ? 'completed' : 'active';
-    const fields = { Status: status };
-    this.ngRedux.dispatch(Actions.UpdateContent(todoItem.Id, fields));
+
+    this.ngRedux.dispatch(Actions.UpdateContent(todoItem.Id, Object, {
+      Status: (todoItem.Status[0] === 'active') ? 'completed' : 'active',
+    }));
   }
 }
