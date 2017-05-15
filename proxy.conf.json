@@ -1,6 +1,12 @@
 {
     "/odata.svc": {
-        "target": "http://sn-local/",
+        "target": "https://sn-local/",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"        
+    },
+    "/sn-token": {
+        "target": "https://sn-local/",
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug"        
