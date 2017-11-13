@@ -1,6 +1,7 @@
-import { Component, Pipe, PipeTransform } from '@angular/core';
+import { Component, Pipe, PipeTransform, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { NgRedux, select } from 'ng2-redux';
+import { NgRedux, select } from '@angular-redux/store';
+import { Actions } from 'sn-redux';
 
 export interface IAppState {
 };
@@ -10,16 +11,17 @@ export interface IAppState {
   template: `<div id="app">
     <img src="./assets/img/sensenetlogo.png">
     <img src="./assets/img/angularlogo.png">
+    <app-login></app-login>
     <h1>Todos</h1>
-    <app-add-todo 
-      [state]="state$ | async" 
+    <app-add-todo
+      [state]="state$ | async"
       [path]="path"></app-add-todo>
-    <app-todolist 
-      [state]="state$ | async" 
+    <app-todolist
+      [state]="state$ | async"
       [path]=path></app-todolist>
   </div>`,
   styleUrls: [
-    '../../node_modules/@angular/material/core/theming/prebuilt/indigo-pink.css'
+    '../../node_modules/@angular/material/prebuilt-themes/indigo-pink.css'
   ],
   styles: [`
   h1, h2 {
@@ -57,10 +59,14 @@ a {
 }
   `]
 })
-export class SnTodoListComponent {
+export class SnTodoListComponent implements OnInit {
   @select() state$: Observable<any>;
-  path = '/workspaces/Project/budapestprojectworkspace/Tasks';
+  path = '/Root/Sites/Default_Site/todos';
 
   constructor(private ngRedux: NgRedux<IAppState>) {}
+
+  ngOnInit() {
+      this.ngRedux.dispatch(Actions.CheckLoginState());
+  }
 
 }

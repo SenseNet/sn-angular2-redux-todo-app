@@ -1,8 +1,8 @@
-import { Component, OnInit, Inject, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Inject, Input, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { getVisibleTodos } from '../reducers/filtering';
-import { NgRedux, select } from 'ng2-redux';
-import { ODataApi } from 'sn-client-js';
+import { NgRedux, select } from '@angular-redux/store';
+import { ODataApi, ContentTypes } from 'sn-client-js';
 import { Actions } from 'sn-redux';
 
 export interface IAppState {
@@ -12,7 +12,7 @@ export interface IAppState {
   selector: 'app-todolist',
   template: `
     <ul>
-    <app-todo 
+    <app-todo
       *ngFor="let todo of todos$ | async"
       [todo]="todo">
     </app-todo>
@@ -28,10 +28,10 @@ export interface IAppState {
   `],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TodolistComponent implements OnInit {
+export class TodolistComponent implements OnInit, OnChanges {
   filter = 'All';
-  todos = [];
-  todos$: Observable<any>;
+  todos: ContentTypes.Task[] = [];
+  todos$: Observable<ContentTypes.Task[]>;
   @Input() state: IAppState;
   @Input() path: string;
   constructor(private ngRedux: NgRedux<IAppState>) {
@@ -44,7 +44,7 @@ export class TodolistComponent implements OnInit {
 
     let optionObj = this.getOptionObject(this.filter);
 
-    this.ngRedux.dispatch(Actions.RequestContent(this.path, optionObj));
+    this.ngRedux.dispatch(Actions.RequestContent(this.path, optionObj, ContentTypes.Task));
   }
   ngOnChanges() {
 
@@ -54,7 +54,7 @@ export class TodolistComponent implements OnInit {
       this.filter = filter;
       this.state = this.ngRedux.getState();
       let optionObj = this.getOptionObject(this.filter);
-      this.ngRedux.dispatch(Actions.RequestContent(this.path, optionObj));
+      this.ngRedux.dispatch(Actions.RequestContent(this.path, optionObj, ContentTypes.Task));
     }
   }
   getOptionObject(filter) {
@@ -62,17 +62,15 @@ export class TodolistComponent implements OnInit {
       select: ['DisplayName', 'Status']
     });
     switch (this.filter) {
-      case 'All':
-        optionObj['filter'] = `isOf('Task')`;
-        break;
       case 'Active':
-        optionObj['filter'] = `isOf('Task') and Status eq %27Active%27`;
+        optionObj.filter = `isOf('Task') and Status eq 'Active'`;
         break;
       case 'Completed':
-        optionObj['filter'] = `isOf('Task') and Status eq %27Completed%27`;
+        optionObj.filter = `isOf('Task') and Status eq 'Completed'`;
         break;
+      case 'All':
       default:
-        optionObj['filter'] = `isOf('Task')`;
+        optionObj.filter = `isOf('Task')`;
         break;
     }
     return optionObj;

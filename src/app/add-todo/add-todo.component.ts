@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { NgRedux } from 'ng2-redux';
+import { NgRedux } from '@angular-redux/store';
 import { Actions } from 'sn-redux';
-import { Content } from 'sn-client-js';
+import { Content, ContentTypes } from 'sn-client-js';
+import { Enums } from 'sn-client-js';
 
 export interface IAppState {
 };
@@ -16,7 +17,7 @@ export interface IAppState {
     <button (click)="createTask(taskName.value)" md-button>Add todo!</button>
   `,
   styles: [`
-  
+
   `]
 })
 export class AddTodoComponent implements OnInit {
@@ -28,12 +29,10 @@ export class AddTodoComponent implements OnInit {
   ngOnInit() {
   }
 
-  createTask(title) {
-    let content = Content.Create('Task', {
-      Type: 'Task',
-      DisplayName: title
-    });
-    content['Status'] = 'active';
-    this.ngRedux.dispatch(Actions.CreateContent(this.path, content));
+  createTask(title: string) {
+    this.ngRedux.dispatch(Actions.CreateContent(this.path, ContentTypes.Task, {
+      Name: title,
+      DueDate: null
+    }));
   }
 }
