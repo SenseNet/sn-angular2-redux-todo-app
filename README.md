@@ -1,5 +1,7 @@
 # Todo App example with SN7, Angular2 and Redux
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/SenseNet/sn-angular2-redux-todo-app.svg)](https://greenkeeper.io/)
+
 [![Build status](https://img.shields.io/travis/SenseNet/sn-angular2-redux-todo-app.svg?style=flat)](https://travis-ci.org/SenseNet/sn-angular2-redux-todo-app)
 [![License](https://img.shields.io/github/license/SenseNet/sn-angular2-redux-todo-app.svg?style=flat)](https://github.com/SenseNet/sn-angular2-redux-todo-app/LICENSE.txt)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat)](http://commitizen.github.io/cz-cli/)
