@@ -5,29 +5,29 @@ import { ContentTypes } from 'sn-client-js';
 import { Observable } from 'rxjs/Observable';
 import { Authentication } from 'sn-client-js';
 import { getLoginState } from '../reducers/loginState';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 
 export interface IAppState {
-    collection: any;
+    sensenet: any;
 };
 
 @Component({
     selector: 'app-login-dialog',
     template: `
     <div>
-        <h1 md-dialog-title>Log in</h1>
-        <md-dialog-content>
-            <md-input-container>
-                <input mdInput [(ngModel)]="userName" placeholder='Username' name='userName' type='text'>
-            </md-input-container>
-            <md-input-container>
-                <input mdInput [(ngModel)]="password" placeholder='Password' name='password' type='password'>
-            </md-input-container>
-        </md-dialog-content>
-        <md-dialog-actions>
-            <button md-dialog-close md-button type='submit' (click)="login()"> Login </button>
-        </md-dialog-actions>
+        <h1 mat-dialog-title>Log in</h1>
+        <mat-dialog-content>
+            <mat-form-field>
+                <input matInput [(ngModel)]="userName" placeholder='Username' name='userName' type='text'>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="password" placeholder='Password' name='password' type='password'>
+            </mat-form-field>
+        </mat-dialog-content>
+        <mat-dialog-actions>
+            <button mat-dialog-close mat-button type='submit' (click)="login()"> Login </button>
+        </mat-dialog-actions>
     </div>`
 })
 export class LoginDialogComponent {
@@ -73,11 +73,11 @@ export class LoginComponent implements OnInit {
     LoginState: Observable<Authentication.LoginState>;
     currentState: Authentication.LoginState;
 
-    constructor(private ngRedux: NgRedux<IAppState>, public dialog: MdDialog) {
+    constructor(private ngRedux: NgRedux<IAppState>, public dialog: MatDialog) {
     }
 
     ngOnInit() {
-        this.LoginState = this.ngRedux.select(state => state.collection.user.loginState);
+        this.LoginState = this.ngRedux.select(state => state.sensenet.session.loginState);
         this.LoginState.subscribe(state => {
             this.currentState = state;
             if (state === Authentication.LoginState.Unauthenticated) {

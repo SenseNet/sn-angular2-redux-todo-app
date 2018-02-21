@@ -6,6 +6,7 @@ import { ODataApi, ContentTypes } from 'sn-client-js';
 import { Actions } from 'sn-redux';
 
 export interface IAppState {
+  sensenet: any
 };
 
 @Component({
@@ -40,7 +41,11 @@ export class TodolistComponent implements OnInit, OnChanges {
     }
   }
   ngOnInit() {
-    this.todos$ = this.ngRedux.select(state => getVisibleTodos(state, this.filter));
+
+    this.ngRedux.subscribe(() => {
+      this.todos$ = this.ngRedux.select(state => getVisibleTodos(state, this.filter));
+    })
+
 
     let optionObj = this.getOptionObject(this.filter);
 
@@ -58,9 +63,9 @@ export class TodolistComponent implements OnInit, OnChanges {
     }
   }
   getOptionObject(filter) {
-    let optionObj = new ODataApi.ODataParams({
+    let optionObj = {
       select: ['DisplayName', 'Status']
-    });
+    } as ODataApi.IODataParams<ContentTypes.Task>;
     switch (this.filter) {
       case 'Active':
         optionObj.filter = `isOf('Task') and Status eq 'Active'`;

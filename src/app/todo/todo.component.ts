@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
 import { Actions } from 'sn-redux';
 import { ContentTypes } from 'sn-client-js';
+import { Status } from 'sn-client-js/dist/src/Enums';
 
 export interface IAppState {
 };
@@ -10,8 +11,8 @@ export interface IAppState {
   selector: 'app-todo',
   template: `
     <div>
-      <md-checkbox class="example-margin" (click)="changeCompletion(todo)" [(ngModel)]="checked">{{todo.DisplayName}}</md-checkbox>
-      <md-icon (click)="deleteTask(todo.Id)">delete</md-icon>
+      <mat-checkbox class="example-margin" (click)="changeCompletion(todo)" [(ngModel)]="checked">{{todo.DisplayName}}</mat-checkbox>
+      <mat-icon (click)="deleteTask(todo.Id)" svgIcon="delete"></mat-icon>
     </div>
   `,
   styles: [`
@@ -39,11 +40,9 @@ export class TodoComponent implements OnInit {
     this.ngRedux.dispatch(Actions.Delete(id, true));
   }
 
-  changeCompletion(todoItem) {
-    const status = (todoItem.Status[0] === 'active') ? 'completed' : 'active';
-
-    this.ngRedux.dispatch(Actions.UpdateContent(todoItem.Id, Object, {
-      Status: (todoItem.Status[0] === 'active') ? 'completed' : 'active',
-    }));
+  changeCompletion(todoItem: ContentTypes.Task) {
+    const status = (todoItem.Status[0] === Status.active) ? Status.completed : Status.active;
+    todoItem.Status = status;
+    this.ngRedux.dispatch(Actions.UpdateContent(todoItem));
   }
 }

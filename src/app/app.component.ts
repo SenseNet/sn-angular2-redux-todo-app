@@ -60,7 +60,7 @@ a {
   `]
 })
 export class SnTodoListComponent implements OnInit {
-  @select() state$: Observable<any>;
+  @select() state$: Observable<IAppState>;
   path = '/Root/Sites/Default_Site/todos';
 
   constructor(private ngRedux: NgRedux<IAppState>) {}

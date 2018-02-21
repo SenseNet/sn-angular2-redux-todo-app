@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import { Reducers } from 'sn-redux';
 
-export const createList = (filter) => {
+export const createList = (baseFilter) => {
   const handleToggle = (state, action, filter) => {
     const {result: toggleId, entities} = action.response;
-    const {Status} = entities.collection[toggleId];
+    const Status = action.response.Status;
     const shouldRemove = (
       (Status.indexOf('Active') === - 1 && filter === 'Active') ||
       (Status.indexOf('Completed') === - 1 && filter === 'Completed')
@@ -20,7 +20,7 @@ export const createList = (filter) => {
       case 'CREATE_CONTENT_SUCCESS':
         return [...state, action.response.result];
       case 'UPDATE_CONTENT_SUCCESS':
-        return handleToggle(state, action, filter)
+        return handleToggle(state, action, baseFilter)
       case 'DELETE_CONTENT_SUCCESS':
         return [...state.slice(0, action.index), ...state.slice(action.index + 1)];
       default:
@@ -64,10 +64,14 @@ export const listByFilter = combineReducers({
   Completed: createList('Completed')
 });
 
-export const getVisibleTodos = (state, filter) => {
-  const ids = Reducers['getIds'](state.listByFilter[filter]);
-  return ids.map(Id => Reducers['getContent'](state.collection.byId, Id));
-};
+export const getVisibleTodos = (state, filter) => Reducers.getIds(state.listByFilter[filter])
+  .map(id => state.sensenet.children.entities[id]);
+  // {
+  //     if (state.sensenet.children.entities && state.sensenet.children.entities.length) {
+  //      const ids = Reducers['getChildren'](state.listByFilter[filter]);
+  //      return ids.map(Id => Reducers['getContent'](state.collection.byId, Id));
+  //     }
+  // };
 
 export const getIsFetching = (state, filter) =>
   Reducers['getFetching'](state.listByFilter[filter]);

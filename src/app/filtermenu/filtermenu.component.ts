@@ -3,13 +3,13 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-filtermenu',
   template: `
-    <md-toolbar-row>
-      <button md-button *ngFor="let b of filters"
+    <mat-toolbar-row>
+      <button mat-button *ngFor="let b of filters"
         [ngClass]="getSelectedClass(b)"
         (click)="selectFilter(b)">
         {{ b.title }}
         </button>
-    </md-toolbar-row>
+    </mat-toolbar-row>
   `,
   styles: [`
     .md-accent .md-ripple-background {
