@@ -35,7 +35,7 @@
   "dependencies": {
     "@angular-redux/store": "^7.1.0",
     "@angular/animations": "^5.2.5",
-    "@angular/cdk": "^5.2.2",
+    "@angular/cdk": "^6.0.2",
     "@angular/common": "^5.2.5",
     "@angular/compiler": "^5.2.5",
     "@angular/core": "^5.2.5",
