@@ -61,7 +61,7 @@
     "@angular/compiler-cli": "^5.2.5",
     "@types/hammerjs": "2.0.35",
     "@types/jasmine": "^2.8.6",
-    "@types/node": "^9.4.6",
+    "@types/node": "^10.3.3",
     "codecov.io": "0.1.6",
     "codelyzer": "^4.1.0",
     "commitizen": "2.9.6",
