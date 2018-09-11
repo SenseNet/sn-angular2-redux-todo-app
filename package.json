@@ -59,7 +59,7 @@
   "devDependencies": {
     "@angular/cli": "^1.7.0",
     "@angular/compiler-cli": "^5.2.5",
-    "@types/hammerjs": "2.0.35",
+    "@types/hammerjs": "2.0.36",
     "@types/jasmine": "^2.8.6",
     "@types/node": "^9.4.6",
     "codecov.io": "0.1.6",
