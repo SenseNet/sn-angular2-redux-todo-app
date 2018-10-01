@@ -64,7 +64,7 @@
     "@types/node": "^9.4.6",
     "codecov.io": "0.1.6",
     "codelyzer": "^4.1.0",
-    "commitizen": "2.9.6",
+    "commitizen": "3.0.1",
     "cz-conventional-changelog": "2.1.0",
     "jasmine-core": "^2.99.1",
     "jasmine-spec-reporter": "4.2.1",
